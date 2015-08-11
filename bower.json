@@ -1,0 +1,22 @@
+{
+  "name": "modalCampaign",
+  "version": "0.0.0",
+  "authors": [
+    "Basavaraj Teli <basavaraj.telicse@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "~0.13.3",
+    "angular": "~1.4.3",
+    "bootstrap": "~3.3.5",
+    "ui-bootstrap": "~0.13.3",
+    "ui-router": "~0.2.15"
+  }
+}

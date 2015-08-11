@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+
+<head>
+    <title>AngularJS: UI-Router Quick Start</title>
+    <!-- Bootstrap CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body class="container">
+
+  <div>
+      <a class="btn btn-primary" ui-sref="route1">Route 1</a>
+      <a class="btn btn-primary" ui-sref="route2">Route 2</a>
+  </div>
+<hr>
+  <div class="row">
+    <div class="span6">
+      <div ui-view></div>        
+    </div>
+  </div>         
+  
+  <!-- Angular -->
+
+  <script src="bower_components/angular/angular.js"></script>
+  <!-- UI-Router -->
+  <script src="bower_components/ui-router/release/angular-ui-router.js"></script>
+        <script  src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    
+  
+  <!-- App Script -->
+  <script>
+angular.module('myapp', ["ui.router","ui.bootstrap"])
+.config(function($stateProvider){
+    $stateProvider
+        .state('route1', {
+            url: "/route1",
+                    template: "<my-directive></my-directive>"
+        })
+        .state('route2', {
+            url: "/route2",
+            template: "<h1>route2 Content</h1>"
+
+        }).state('modalroute1',{
+            views:{
+
+                     'moadaview': {
+                         url: "/modalroute1",
+                        template: "route1 content"
+                    }
+
+            }
+        }).state('modalroute2',{
+            views:{
+
+                     'moadaview': {
+                         url: "/modalroute2",
+                        template: "route2 content"
+                    }
+
+            }
+        }
+    )
+    }).controller('modalController',function ( $scope){
+            var vm=this;
+    
+    }).directive('modalExample', function () {
+        return {
+            restrict: "E",
+            scope: {},
+            templateUrl: 'modal.html',
+            controller:'modalController',
+            controllerAs: "vm"
+        };
+    
+    }).controller('mycontroller',function ( $scope,$modal){
+            var vm=this;
+            vm.data="MyData";
+            vm.open = function () {
+                $modal.open({
+                    template: '<modal-example></modal-example>',
+                    controller: 'modalController',
+                    controllerAs: 'vm',
+                    resolve: {}
+                });
+            };
+    })
+    .directive('myDirective', function () {
+        return {
+            restrict: "E",
+            /*scope: {},*/
+            templateUrl: 'my.html',
+            controller:'mycontroller',
+            controllerAs: "vm"
+        };
+    });
+
+  </script>
+
+</body>
+
+</html>
